@@ -10,6 +10,7 @@ const { PORT, DB_URL } = require('./config');
 const CharactersService = require('./Services/characters-service');
 const RacesService = require('./Services/races-service');
 const ClassesService = require('./Services/classes-service');
+const BackgroundsService = require('./Services/backgrounds-service');
 
 const app = express();
 const jsonParser = express.json();
@@ -45,6 +46,15 @@ app.get('/classes-data', (req, res, next) => {
   ClassesService.getAllClasses(knexInstance)
     .then(classes => {
       res.json(classes);
+    })
+    .catch(next)
+})
+
+app.get('/backgrounds-data', (req, res, next) => {
+  const knexInstance = req.app.get('db');
+  BackgroundsService.getAllBackgrounds(knexInstance)
+    .then(backgrounds => {
+      res.json(backgrounds);
     })
     .catch(next)
 })

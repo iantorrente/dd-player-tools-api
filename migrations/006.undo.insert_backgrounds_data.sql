@@ -1,0 +1,1 @@
+DELETE FROM backgrounds_data;
