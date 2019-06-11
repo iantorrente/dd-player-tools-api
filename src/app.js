@@ -11,6 +11,7 @@ const CharactersService = require('./Services/characters-service');
 const RacesService = require('./Services/races-service');
 const ClassesService = require('./Services/classes-service');
 const BackgroundsService = require('./Services/backgrounds-service');
+const AlignmentsService = require('./Services/alignments-service');
 
 const app = express();
 const jsonParser = express.json();
@@ -55,6 +56,15 @@ app.get('/backgrounds-data', (req, res, next) => {
   BackgroundsService.getAllBackgrounds(knexInstance)
     .then(backgrounds => {
       res.json(backgrounds);
+    })
+    .catch(next)
+})
+
+app.get('/alignments-data', (req, res, next) => {
+  const knexInstance = req.app.get('db');
+  AlignmentsService.getAllAlignments(knexInstance)
+    .then(alignments => {
+      res.json(alignments);
     })
     .catch(next)
 })
