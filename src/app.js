@@ -25,9 +25,6 @@ const db = knex({
   connection: DB_URL
 })
 
-console.log('DB_URL:');
-console.log(DB_URL);
-
 app.set('db', db);
 
 app.use(morgan(morganOption));
@@ -72,16 +69,6 @@ app.get('/api/alignments-data', (req, res, next) => {
     })
     .catch(next)
 })
-
-app.post('/', jsonParser, (req, res, next) => {
-  const knexInstance = req.app.get('db');
-  console.log(req.body);
-  CharactersService.insertCharacter(knexInstance, req.body)
-    .then(character => {
-      res.json(character);
-    })
-    .catch(next)
-});
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
