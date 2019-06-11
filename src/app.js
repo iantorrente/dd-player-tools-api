@@ -9,6 +9,7 @@ const { NODE_ENV } = require('./config');
 const { PORT, DB_URL } = require('./config');
 const CharactersService = require('./Services/characters-service');
 const RacesService = require('./Services/races-service');
+const ClassesService = require('./Services/classes-service');
 
 const app = express();
 const jsonParser = express.json();
@@ -35,6 +36,15 @@ app.get('/races-data', (req, res, next) => {
   RacesService.getAllRaces(knexInstance)
     .then(races => {
       res.json(races);
+    })
+    .catch(next)
+})
+
+app.get('/classes-data', (req, res, next) => {
+  const knexInstance = req.app.get('db');
+  ClassesService.getAllClasses(knexInstance)
+    .then(classes => {
+      res.json(classes);
     })
     .catch(next)
 })
