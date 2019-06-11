@@ -1,0 +1,1 @@
+DELETE FROM alignments_data;
