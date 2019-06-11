@@ -7,8 +7,8 @@ const { CLIENT_ORIGIN } = require('./config');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const { PORT, DB_URL } = require('./config');
-const CharactersService = require('./characters-service');
-const RacesService = require('./races-service');
+const CharactersService = require('./Services/characters-service');
+const RacesService = require('./Services/races-service');
 
 const app = express();
 const jsonParser = express.json();
