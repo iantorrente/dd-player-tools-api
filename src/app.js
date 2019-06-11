@@ -6,7 +6,6 @@ const cors = require('cors');
 const { CLIENT_ORIGIN } = require('./config');
 const { NODE_ENV } = require('./config');
 const { PORT, DB_URL } = require('./config');
-const { API_BASE_URL } = require('./config');
 const helmet = require('helmet');
 const CharactersService = require('./Services/characters-service');
 const RacesService = require('./Services/races-service');
@@ -26,6 +25,9 @@ const db = knex({
   connection: DB_URL
 })
 
+console.log('DB_URL:');
+console.log(DB_URL);
+
 app.set('db', db);
 
 app.use(morgan(morganOption));
@@ -35,6 +37,7 @@ app.use(cors({
 app.use(helmet());
 
 app.get('/api/races-data', (req, res, next) => {
+  console.log('getting /api/races-data');
   const knexInstance = req.app.get('db');
   RacesService.getAllRaces(knexInstance)
     .then(races => {
