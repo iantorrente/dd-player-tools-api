@@ -218,7 +218,7 @@ VALUES
     "cleric": {
       "name": "Cleric",
       "classFeatures": {
-        "hitDice": "1d8 per Bard level",
+        "hitDice": "1d8 per Cleric level",
         "hpAtLevelOne": 8,
         "hpGainOnLevelUp": 5,
         "proficiencies": {
