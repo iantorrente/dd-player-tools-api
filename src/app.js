@@ -16,6 +16,18 @@ const AlignmentsService = require('./Services/alignments-service');
 const app = express();
 const jsonParser = express.json();
 
+// To be removed when app goes live
+if (NODE_ENV === 'production') {
+  app.use(cors({
+    origin: CLIENT_ORIGIN
+  }));
+} else {
+  app.use(cors({
+    origin: 'http://localhost:3000'
+  }));
+}
+// To be removed when app goes live
+
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
@@ -28,9 +40,6 @@ const db = knex({
 app.set('db', db);
 
 app.use(morgan(morganOption));
-app.use(cors({
-  origin: CLIENT_ORIGIN
-}));
 app.use(helmet());
 
 app.get('/api/races-data', (req, res, next) => {
